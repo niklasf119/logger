@@ -6,9 +6,9 @@ A simple to use lightweight Logger for Java. This library makes it easy to setup
 
 ```xml
 <dependency>
-	<groupId>com.github.niklasf119</groupId>
-	<artifactId>logger</artifactId>
-	<version>Tag</version>
+  <groupId>com.github.niklasf119</groupId>
+  <artifactId>logger</artifactId>
+  <version>Tag</version>
 </dependency>
 ```
 ```xml
@@ -61,4 +61,18 @@ dest.file=true
 log.level=ALL
 log.rollover=1
 log.dir=C:\Users\Niklas\ownCloud\Hawolare\Core\logs
+```
+
+## Example usage
+
+```java
+import com.hawolt.logging.Logger;
+
+import java.util.Date;
+
+public class App {
+    public static void main(String[] args) {
+        Logger.info("Github Example ran at {}", new Date());
+    }
+}
 ```
