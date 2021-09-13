@@ -1,0 +1,7 @@
+format.date=dd MMM yyyy HH:mm:ss
+format.file=dd-MMM-yyyy_HH-mm-ss
+dest.console=true
+dest.file=true
+log.level=ALL
+log.rollover=1
+log.dir=C:\Users\Niklas\ownCloud\Hawolare\Core\logs
