@@ -82,7 +82,7 @@ public class Logger {
         }
     }
 
-    private static String format(String format, Object... objects) {
+    public static String format(String format, Object... objects) {
         StringBuilder builder = new StringBuilder(format);
         int count = 0;
         int indexOf = -1;
