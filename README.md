@@ -53,6 +53,8 @@ Available settings
 
 ## Example configuration
 
+The file containing the configuration is called `log.properties` and has to be placed in `System.getProperty("user.dir")`
+
 ```
 format.date=dd MMM yyyy HH:mm:ss
 format.file=dd-MMM-yyyy_HH-mm-ss
