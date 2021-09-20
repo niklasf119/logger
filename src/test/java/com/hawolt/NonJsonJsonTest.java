@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class NonJsonJsonTest {
 
     @Test
-    public void testFormatting() {
+    public void testInvalidJson() {
         Object o = new Object();
         try {
             JsonSource source = JsonSource.of(o);
