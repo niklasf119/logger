@@ -1,26 +1,33 @@
 package com.hawolt;
 
 import com.hawolt.exception.InvalidKeyException;
+import com.hawolt.exception.InvalidObjectException;
 import com.hawolt.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JsonSource {
 
-    public static JsonSource of(String file) throws IOException {
-        try (InputStream stream = Core.getFileAsStream(Paths.get(file))) {
-            JsonSource source = new JsonSource(Core.read(stream).toString());
-            for (String key : source.config.keySet()) {
-                Logger.debug("[{}] sourcing: {}={}", file, key, source.config.get(key));
-            }
-            return source;
+    public static JsonSource of(Path path) throws IOException {
+        try (InputStream stream = Core.getFileAsStream(path)) {
+            return JsonSource.of(Core.read(stream).toString());
         }
+    }
+
+    public static JsonSource of(Object json) {
+        JsonSource source = new JsonSource(json);
+        for (String key : source.config.keySet()) {
+            if (key == null) continue;
+            Logger.debug("sourcing: {}={}", key, source.config.get(key));
+        }
+        return source;
     }
 
     private Map<String, String> config = new HashMap<>();
@@ -50,7 +57,11 @@ public class JsonSource {
                 parse(identifier == null ? String.valueOf(i) : String.join(".", identifier, String.valueOf(i)), array.get(i));
             }
         } else {
-            config.put(identifier, o.toString());
+            if (identifier == null) {
+                throw new InvalidObjectException(o);
+            } else {
+                config.put(identifier, o.toString());
+            }
         }
     }
 
